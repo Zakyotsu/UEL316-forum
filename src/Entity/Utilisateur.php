@@ -46,9 +46,13 @@ class Utilisateur
     #[ORM\OneToMany(mappedBy: 'relation', targetEntity: Commentaires::class)]
     private Collection $commentaires;
 
+    #[ORM\OneToMany(mappedBy: 'createrId', targetEntity: Post::class)]
+    private Collection $posts;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
+        $this->posts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -164,6 +168,36 @@ class Utilisateur
             // set the owning side to null (unless already changed)
             if ($commentaire->getRelation() === $this) {
                 $commentaire->setRelation(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Post>
+     */
+    public function getPosts(): Collection
+    {
+        return $this->posts;
+    }
+
+    public function addPost(Post $post): self
+    {
+        if (!$this->posts->contains($post)) {
+            $this->posts->add($post);
+            $post->setCreaterId($this);
+        }
+
+        return $this;
+    }
+
+    public function removePost(Post $post): self
+    {
+        if ($this->posts->removeElement($post)) {
+            // set the owning side to null (unless already changed)
+            if ($post->getCreaterId() === $this) {
+                $post->setCreaterId(null);
             }
         }
 

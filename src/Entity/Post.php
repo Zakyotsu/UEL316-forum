@@ -24,6 +24,9 @@ class Post
     #[ORM\OneToMany(mappedBy: 'postRelation', targetEntity: Commentaires::class)]
     private Collection $commentaires;
 
+    #[ORM\ManyToOne(inversedBy: 'posts')]
+    private ?Utilisateur $createrId = null;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
@@ -84,6 +87,18 @@ class Post
                 $commentaire->setPostRelation(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCreaterId(): ?Utilisateur
+    {
+        return $this->createrId;
+    }
+
+    public function setCreaterId(?Utilisateur $createrId): self
+    {
+        $this->createrId = $createrId;
 
         return $this;
     }
