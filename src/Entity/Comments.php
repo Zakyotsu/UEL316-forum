@@ -18,11 +18,11 @@ class Comments
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $user_id = null;
+    private ?User $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Posts $post_id = null;
+    private ?Posts $post = null;
 
     public function getId(): ?int
     {
@@ -41,26 +41,26 @@ class Comments
         return $this;
     }
 
-    public function getUserId(): ?User
+    public function getUser(): ?User
     {
-        return $this->user_id;
+        return $this->user;
     }
 
-    public function setUserId(?User $user_id): self
+    public function setUser(?User $user): self
     {
-        $this->user_id = $user_id;
+        $this->user = $user;
 
         return $this;
     }
 
-    public function getPostId(): ?Posts
+    public function getPost(): ?Posts
     {
-        return $this->post_id;
+        return $this->post;
     }
 
-    public function setPostId(?Posts $post_id): self
+    public function setPost(?Posts $post): self
     {
-        $this->post_id = $post_id;
+        $this->post = $post;
 
         return $this;
     }

@@ -26,9 +26,9 @@ class Posts
 
     #[ORM\ManyToOne(inversedBy: 'posts')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $creator_id = null;
+    private ?User $creator = null;
 
-    #[ORM\OneToMany(mappedBy: 'post_id', targetEntity: Comments::class)]
+    #[ORM\OneToMany(mappedBy: 'post', targetEntity: Comments::class)]
     private Collection $comments;
 
     public function __construct()
@@ -77,14 +77,14 @@ class Posts
         return $this;
     }
 
-    public function getCreatorId(): ?User
+    public function getCreator(): ?User
     {
-        return $this->creator_id;
+        return $this->creator;
     }
 
-    public function setCreatorId(?User $creator_id): self
+    public function setCreator(?User $creator): self
     {
-        $this->creator_id = $creator_id;
+        $this->creator = $creator;
 
         return $this;
     }
@@ -101,7 +101,7 @@ class Posts
     {
         if (!$this->comments->contains($comment)) {
             $this->comments->add($comment);
-            $comment->setPostId($this);
+            $comment->setPost($this);
         }
 
         return $this;
@@ -111,8 +111,8 @@ class Posts
     {
         if ($this->comments->removeElement($comment)) {
             // set the owning side to null (unless already changed)
-            if ($comment->getPostId() === $this) {
-                $comment->setPostId(null);
+            if ($comment->getPost() === $this) {
+                $comment->setPost(null);
             }
         }
 
