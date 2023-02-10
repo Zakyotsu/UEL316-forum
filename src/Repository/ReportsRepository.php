@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Reposts;
+use App\Entity\Reports;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Reposts>
+ * @extends ServiceEntityRepository<Reports>
  *
- * @method Reposts|null find($id, $lockMode = null, $lockVersion = null)
- * @method Reposts|null findOneBy(array $criteria, array $orderBy = null)
- * @method Reposts[]    findAll()
- * @method Reposts[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Reports|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Reports|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Reports[]    findAll()
+ * @method Reports[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class RepostsRepository extends ServiceEntityRepository
+class ReportsRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Reposts::class);
+        parent::__construct($registry, Reports::class);
     }
 
-    public function save(Reposts $entity, bool $flush = false): void
+    public function save(Reports $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class RepostsRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Reposts $entity, bool $flush = false): void
+    public function remove(Reports $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class RepostsRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return Reposts[] Returns an array of Reposts objects
+//     * @return Reports[] Returns an array of Reports objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class RepostsRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Reposts
+//    public function findOneBySomeField($value): ?Reports
 //    {
 //        return $this->createQueryBuilder('r')
 //            ->andWhere('r.exampleField = :val')
