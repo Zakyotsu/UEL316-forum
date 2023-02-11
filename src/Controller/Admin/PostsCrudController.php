@@ -4,22 +4,23 @@ namespace App\Controller\Admin;
 
 use App\Entity\Posts;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\{AssociationField, DateField, IdField, TextField};
 
 class PostsCrudController extends AbstractCrudController
 {
-    public static function getEntityFqcn(): string
-    {
+    public static function getEntityFqcn(): string {
         return Posts::class;
     }
 
-    /*
-    public function configureFields(string $pageName): iterable
-    {
+    public function configureFields(string $pageName): iterable {
         return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
+            IdField::new('id')->hideOnForm(),
+            TextField::new('title')->setLabel('Titre'),
+            TextField::new('description')->setLabel('Description'),
+            TextField::new('content')->setLabel('Contenu'),
+            DateField::new('date')->hideOnForm(),
+            AssociationField::new('creator')->setLabel('Créateur du post')
         ];
     }
-    */
+
 }

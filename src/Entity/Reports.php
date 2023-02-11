@@ -20,6 +20,10 @@ class Reports
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
+    #[ORM\ManyToOne(inversedBy: 'reports')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Comments $comment = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -47,5 +51,22 @@ class Reports
         $this->user = $user;
 
         return $this;
+    }
+
+    public function getComment(): ?Comments
+    {
+        return $this->comment;
+    }
+
+    public function setComment(?Comments $comment): self
+    {
+        $this->comment = $comment;
+
+        return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->getReason();
     }
 }

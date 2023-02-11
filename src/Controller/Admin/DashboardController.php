@@ -21,19 +21,22 @@ class DashboardController extends AbstractDashboardController
 
     public function configureDashboard(): Dashboard {
         return Dashboard::new()
-            ->setTitle('AdminZone: Forum');
+            ->setTitle('Admin Zone');
     }
 
     public function configureMenuItems(): iterable {
-        MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        MenuItem::linkToUrl('Accueil du Front-end', 'fa -fa-arrow-left', $this->generateUrl('app_home_page'));
 
-        MenuItem::section('Gestion de la base de données');
-        MenuItem::linkToCrud('Utilisateurs', 'fas fa-list', User::class);
-        MenuItem::linkToCrud('Commentaires', 'fas fa-list', Comments::class);
-        MenuItem::linkToCrud('Posts', 'fas fa-list', Posts::class);
-        MenuItem::linkToCrud('Signalements', 'fas fa-list', Reports::class);
+        return [
+            MenuItem::linkToDashboard('Dashboard', 'fa fa-home'),
+            MenuItem::linkToUrl('Accueil du Front-end', 'fa -fa-arrow-left', $this->generateUrl('app_home_page')),
 
-        MenuItem::linkToLogout('Déconnexion', 'fa fa-fa fa-sign-out');
+            MenuItem::section('Gestion de la base de données'),
+            MenuItem::linkToCrud('Utilisateurs', 'fas fa-list', User::class),
+            MenuItem::linkToCrud('Commentaires', 'fas fa-list', Comments::class),
+            MenuItem::linkToCrud('Posts', 'fas fa-list', Posts::class),
+            MenuItem::linkToCrud('Signalements', 'fas fa-list', Reports::class),
+
+            //MenuItem::linkToLogout('Déconnexion', 'fa fa-fa fa-sign-out'),
+        ];
     }
 }
