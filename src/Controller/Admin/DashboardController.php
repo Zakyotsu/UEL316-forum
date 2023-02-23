@@ -36,7 +36,7 @@ class DashboardController extends AbstractDashboardController
             MenuItem::linkToCrud('Posts', 'fas fa-list', Posts::class),
             MenuItem::linkToCrud('Signalements', 'fas fa-list', Reports::class),
 
-            //MenuItem::linkToLogout('Déconnexion', 'fa fa-fa fa-sign-out'),
+            MenuItem::linkToLogout('Déconnexion', 'fa fa-fa fa-sign-out'),
         ];
     }
 }
