@@ -6,16 +6,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class HomePageController extends AbstractController
+class NewsController extends AbstractController
 {
-    #[Route('/', name: 'app_home_page')]
+    #[Route('/news', name: 'app_news')]
     public function index(PostsRepository $postsRepository): Response
     {
-        $posts = $postsRepository->findBy([], ['date' => 'DESC'], 3);
-        return $this->render('home_page/index.html.twig', [
+        $posts = $postsRepository->findAll();
+        return $this->render('news/index.html.twig', [
             'posts' => $posts,
         ]);
     }
-
-
 }
