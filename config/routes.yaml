@@ -1,3 +1,14 @@
 controllers:
     resource: ../src/Controller/
     type: attribute
+
+app_homepage:
+    path: /
+    controller: App\Controller\HomePageController::index
+
+login:
+    path: /login
+    controller: App\Controller\SecurityController::login
+news:
+    path: /news
+    controller: App\Controller\NewsController::index
