@@ -1,0 +1,4 @@
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^https://diarra9.hosting.unilim.fr/manager [NC,OR]
+RewriteCond %{HTTP_HOST} ^https://diarra9.hosting.unilim.fr/manager [NC]
+RewriteRule ^(.*)$ var/www/html/UEL316-forum/public/$1 [L,NC,QSA]
