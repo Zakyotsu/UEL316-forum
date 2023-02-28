@@ -30,28 +30,11 @@ class RegistrationFormType extends AbstractType
                 'required' => true,
                 'multiple' => true,
                 'choice_translation_domain' => 'user',
-                'choices' => User::ROLES
+                'choices' => [
+                    'Utilisateur' => 'ROLE_USER'
+                ]
             ))
-            ->add('password', RepeatedType::class, [
-                // instead of being set onto the object directly,
-                // this is read and encoded in the controller
-                'type' => PasswordType::class,
-                'invalid_message' => 'Les MDP doivent correspondre.',
-                'attr' => ['autocomplete' => 'new-password'],
-                'first_options' => ['label' => 'Mot de passe'],
-                'second_options' => ['label' => 'Répéter le mot de passe'],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Entrez un mot de passe.',
-                    ]),
-                    new Length([
-                        'min' => 8,
-                        'minMessage' => 'Votre mot de passe doit faire au moins {{ limit }} caractères.',
-                        // max length allowed by Symfony for security reasons
-                        'max' => 4096,
-                    ]),
-                ],
-            ]);
+            ->add('password', PasswordType::class);
 
 
     }

@@ -50,7 +50,7 @@ class ReportController extends AbstractController
         $report->setComment($comments[0]);
 
         $reportForm = $this->createForm(ReportType::class, $report);
-        $reportForm->handleRequest();
+        $reportForm->handleRequest($request);
 
         if($reportForm->isSubmitted() && $reportForm->isValid()) {
             $entityManager->persist($report);
