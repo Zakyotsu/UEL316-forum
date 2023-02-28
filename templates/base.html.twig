@@ -6,12 +6,62 @@
     <meta charset="UTF-8">
     <title>{% block title %}Welcome!{% endblock %}</title>
     {% block stylesheets %}
-        <link rel="stylesheet" href="{{ asset('css/app.scss') }}">
+        <link rel="stylesheet" href="{{ asset('build/app.css') }}">
         {{ encore_entry_link_tags('app') }}
     {% endblock %}
 </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{{ encore_entry_script_tags('app') }}{% endblock %}
+
+    <nav class="navbar navbar-light navbar-expand-md bg-light justify-content-center">
+        <div class="container">
+            <a href="/" class="navbar-brand d-flex w-50 me-auto">UEL316</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsingNavbar3">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="navbar-collapse collapse w-100" id="collapsingNavbar3">
+                <ul class="navbar-nav w-100 justify-content-center">
+                    <li class="nav-item active">
+                        <a class="nav-link" href={{ path('app_home_page') }}>Accueil</a>
+                    </li>
+                    {% if user != null and is_granted('ROLE_ADMIN') %}
+                        <li class="nav-item">
+                            <a class="nav-link" href={{ path('app_admin') }}><b>Page admin</b></a>
+                        </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link" href={{ path('app_posts') }}>Articles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href={{ path('app_contact') }}>Nous contacter</a>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav ms-auto w-100 justify-content-end">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            {% if user != null %}
+                                Connecté en tant que <b>{{ user.username }}</b>
+                            {% else %}
+                                Non connecté
+                            {% endif %}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarScrollingDropdown">
+                            {% if user != null %}
+                                <li><a class="dropdown-item" href={{ path('app_profile') }}>Mon compte</a></li>
+                                <li><a class="dropdown-item" href={{ path('app_logout') }}>Se déconnecter</a></li>
+                            {% else %}
+                                <li><a class="dropdown-item" href={{ path('app_login') }}>Se connecter</a></li>
+                                <li><a class="dropdown-item" href={{ path('app_register') }}>S'enregistrer</a></li>
+                            {% endif %}
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    {% block body %}{% endblock %}
+    {% block javascripts %}{{ encore_entry_script_tags('app') }}{% endblock %}
     </body>
 </html>

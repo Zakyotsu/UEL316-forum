@@ -4,94 +4,27 @@
 
 {% block body %}
 
-  <nav class="navbar navbar-dark bg-dark" style="flex-direction: row">
-    <div style="align-content: flex-start">
-      <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-    </div>
-    <div style="align-items: flex-end">
-      <a class="nav-link"  href="{{ path('app_login') }}">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-          <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-          <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-        </svg>
-      </a>
-    </div>
-  </nav>
-
-
-  {#
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-
-    </ul>
-      <a class="nav-link" href="{{ path('login') }}">login<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-          <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-          <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-        </svg>
-      </a>
-  </div>
-</nav>
-  #}
 <body>
 
-  <div class="container">
-    <div class="row">
-      <div class="col-md-4">
-        <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-          <div class="card-header">Header</div>
+  <div class="container w-100">
+    <h1 class="text-center mt-4">3 dernières actualités</h1>
+
+    <div class="row justify-content-around">
+
+      {% for post in posts %}
+        <div class="card text-center w-25 mt-4 p-0">
           <div class="card-body">
-            <h2 class="card-title">3 Dernières actualités</h2>
-            <ul>
-              {% for post in posts %}
-                <li>
-                  <h2 class="card-title">{{ post.title }}</h2>
-                  <p>{{ post.content }}</p>
-                  <small>Publié le {{ post.date|date('d/m/Y') }}</small>
-                </li>
-              {% endfor %}
-            </ul>
+            <h5 class="card-title">{{ post.title }}</h5>
+            <h6 class="card-title muted">{{ post.description }}</h6>
+            <p class="card-text">{{ post.content }}</p>
+            <a href={{ path('app_post', {'id':post.id})}} class="btn btn-primary">Voir plus</a>
           </div>
-        {#  <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">3 Dernières actualités</h5>
-            <ul>
-              {% for post in posts %}
-                <li>
-                  <h2 class="card-title">{{ post.title }}</h2>
-                  <p>{{ post.content }}</p>
-                  <small>Publié le {{ post.date|date('d/m/Y') }}</small>
-                </li>
-              {% endfor %}
-            </ul>
-          </div>
-        </div>#}
-      </div>
+          <div class="card-footer text-muted">Publié le {{ post.date|date('d/m/Y') }} par {{ post.creator.username }}</div>
+        </div>
+      {% endfor %}
     </div>
   </div>
 
-
-  {#
-  <div class="pagination">
-     {% if posts.count() -1 != 0 %}
-          <a href="{{ path('news', { 'post': post-1 }) }}" class="pagination-button">{{ post-1 }}</a>
-      {% endif %}
-
-      <p class="pagination-bigbutton">{{ post }}</p>
-
-      {% if nbElementsNext >= 1 %}
-          <a href="{{ path('news', { 'post': post+1 }) }}" class="pagination-button">{{ post+1 }}</a>
-      {% endif %}
-  </div>
-#}
 </body>
 
 {% endblock %}

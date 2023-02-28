@@ -2,10 +2,10 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Comments;
-use App\Entity\Reports;
+use App\Entity\Comment;
+use App\Entity\Report;
 use App\Entity\User;
-use App\Entity\Posts;
+use App\Entity\Post;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DashboardController extends AbstractDashboardController
 {
-    #[Route('/admin', name: 'admin')]
+    #[Route('/admin', name: 'app_admin')]
     public function index(): Response {
         return $this->render('admin/index.html.twig');
     }
@@ -32,9 +32,9 @@ class DashboardController extends AbstractDashboardController
 
             MenuItem::section('Gestion de la base de données'),
             MenuItem::linkToCrud('Utilisateurs', 'fas fa-list', User::class),
-            MenuItem::linkToCrud('Commentaires', 'fas fa-list', Comments::class),
-            MenuItem::linkToCrud('Posts', 'fas fa-list', Posts::class),
-            MenuItem::linkToCrud('Signalements', 'fas fa-list', Reports::class),
+            MenuItem::linkToCrud('Commentaires', 'fas fa-list', Comment::class),
+            MenuItem::linkToCrud('Posts', 'fas fa-list', Post::class),
+            MenuItem::linkToCrud('Signalements', 'fas fa-list', Report::class),
 
             MenuItem::linkToLogout('Déconnexion', 'fa fa-fa fa-sign-out'),
         ];

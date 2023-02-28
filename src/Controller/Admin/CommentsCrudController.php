@@ -2,14 +2,14 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Comments;
+use App\Entity\Comment;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\{ AssociationField, IdField, TextField };
 
 class CommentsCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string {
-        return Comments::class;
+        return Comment::class;
     }
 
     public function configureFields(string $pageName): iterable {

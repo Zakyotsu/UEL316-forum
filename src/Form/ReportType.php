@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Reports;
+use App\Entity\Report;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -14,14 +14,14 @@ class ReportType extends AbstractType
     {
         $builder
             ->add('reason', TextareaType::class, [
-                'label' => 'Your reason',
+                'label' => 'Raison du signalement',
             ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Reports::class,
+            'data_class' => Report::class,
         ]);
     }
 }

@@ -45,13 +45,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $lastname = null;
 
-    #[ORM\OneToMany(mappedBy: 'user_id', targetEntity: Reports::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'user_id', targetEntity: Report::class, orphanRemoval: true)]
     private Collection $reports;
 
-    #[ORM\OneToMany(mappedBy: 'creator_id', targetEntity: Posts::class)]
+    #[ORM\OneToMany(mappedBy: 'creator_id', targetEntity: Post::class)]
     private Collection $posts;
 
-    #[ORM\OneToMany(mappedBy: 'user_id', targetEntity: Comments::class)]
+    #[ORM\OneToMany(mappedBy: 'user_id', targetEntity: Comment::class)]
     private Collection $comments;
 
     public function __construct()
@@ -168,14 +168,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection<int, Reports>
+     * @return Collection<int, Report>
      */
     public function getReports(): Collection
     {
         return $this->reports;
     }
 
-    public function addReport(Reports $report): self
+    public function addReport(Report $report): self
     {
         if (!$this->reports->contains($report)) {
             $this->reports->add($report);
@@ -185,7 +185,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function removeReport(Reports $report): self
+    public function removeReport(Report $report): self
     {
         if ($this->reports->removeElement($report)) {
             // set the owning side to null (unless already changed)
@@ -198,14 +198,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection<int, Posts>
+     * @return Collection<int, Post>
      */
     public function getPosts(): Collection
     {
         return $this->posts;
     }
 
-    public function addPost(Posts $post): self
+    public function addPost(Post $post): self
     {
         if (!$this->posts->contains($post)) {
             $this->posts->add($post);
@@ -215,7 +215,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function removePost(Posts $post): self
+    public function removePost(Post $post): self
     {
         if ($this->posts->removeElement($post)) {
             // set the owning side to null (unless already changed)
@@ -228,14 +228,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection<int, Comments>
+     * @return Collection<int, Comment>
      */
     public function getComments(): Collection
     {
         return $this->comments;
     }
 
-    public function addComment(Comments $comment): self
+    public function addComment(Comment $comment): self
     {
         if (!$this->comments->contains($comment)) {
             $this->comments->add($comment);
@@ -245,7 +245,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function removeComment(Comments $comment): self
+    public function removeComment(Comment $comment): self
     {
         if ($this->comments->removeElement($comment)) {
             // set the owning side to null (unless already changed)

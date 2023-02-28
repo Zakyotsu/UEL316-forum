@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Reports;
+use App\Entity\Report;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Reports>
+ * @extends ServiceEntityRepository<Report>
  *
- * @method Reports|null find($id, $lockMode = null, $lockVersion = null)
- * @method Reports|null findOneBy(array $criteria, array $orderBy = null)
- * @method Reports[]    findAll()
- * @method Reports[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Report|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Report|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Report[]    findAll()
+ * @method Report[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class ReportsRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Reports::class);
+        parent::__construct($registry, Report::class);
     }
 
-    public function save(Reports $entity, bool $flush = false): void
+    public function save(Report $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class ReportsRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Reports $entity, bool $flush = false): void
+    public function remove(Report $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 

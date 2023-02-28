@@ -6,7 +6,7 @@ use App\Repository\ReportsRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ReportsRepository::class)]
-class Reports
+class Report
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -22,7 +22,7 @@ class Reports
 
     #[ORM\ManyToOne(inversedBy: 'reports')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Comments $comment = null;
+    private ?Comment $comment = null;
 
     public function getId(): ?int
     {
@@ -53,12 +53,12 @@ class Reports
         return $this;
     }
 
-    public function getComment(): ?Comments
+    public function getComment(): ?Comment
     {
         return $this->comment;
     }
 
-    public function setComment(?Comments $comment): self
+    public function setComment(?Comment $comment): self
     {
         $this->comment = $comment;
 

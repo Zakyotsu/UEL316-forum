@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CommentsRepository::class)]
-class Comments
+class Comment
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -24,9 +24,9 @@ class Comments
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Posts $post = null;
+    private ?Post $post = null;
 
-    #[ORM\OneToMany(mappedBy: 'comment', targetEntity: Reports::class)]
+    #[ORM\OneToMany(mappedBy: 'comment', targetEntity: Report::class)]
     private Collection $reports;
 
     public function __construct()
@@ -63,12 +63,12 @@ class Comments
         return $this;
     }
 
-    public function getPost(): ?Posts
+    public function getPost(): ?Post
     {
         return $this->post;
     }
 
-    public function setPost(?Posts $post): self
+    public function setPost(?Post $post): self
     {
         $this->post = $post;
 
@@ -76,14 +76,14 @@ class Comments
     }
 
     /**
-     * @return Collection<int, Reports>
+     * @return Collection<int, Report>
      */
     public function getReports(): Collection
     {
         return $this->reports;
     }
 
-    public function addReport(Reports $report): self
+    public function addReport(Report $report): self
     {
         if (!$this->reports->contains($report)) {
             $this->reports->add($report);
@@ -93,7 +93,7 @@ class Comments
         return $this;
     }
 
-    public function removeReport(Reports $report): self
+    public function removeReport(Report $report): self
     {
         if ($this->reports->removeElement($report)) {
             // set the owning side to null (unless already changed)

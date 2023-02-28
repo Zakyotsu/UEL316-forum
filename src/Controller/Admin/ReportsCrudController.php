@@ -2,7 +2,7 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Reports;
+use App\Entity\Report;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\{ AssociationField, IdField, TextField };
 
@@ -10,7 +10,7 @@ class ReportsCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Reports::class;
+        return Report::class;
     }
 
     public function configureFields(string $pageName): iterable

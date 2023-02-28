@@ -7,13 +7,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\User;
 
-class UserController extends AbstractController
+class ProfileController extends AbstractController
 {
-    #[Route('/user', name: 'app_user')]
-    public function show(User $user): Response
+    #[Route('/profile', name: 'app_profile')]
+    public function index(): Response
     {
-        return $this->render('user/index.html.twig', [
-            'user' => $user,
+        return $this->render('profile/index.html.twig', [
+            'user' => $this->getUser()
         ]);
     }
 }
